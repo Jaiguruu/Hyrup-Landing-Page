@@ -5,7 +5,7 @@ HYRUP is a specialized career launchpad built by students, for students. It focu
 
 ## Live Link
 
-" "
+Access the live website here: Demo[https://vercel.com/oauth/git?mode=signup&email=pranavjai2005%40gmail.com&confirmed=1&username=Jaiguruu&token=tTqvLkTjhRI88KhmgEqhEYbj]
 
 ## ✨ Key Features
 
