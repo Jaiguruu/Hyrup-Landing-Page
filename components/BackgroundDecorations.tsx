@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useDarkMode } from "../hooks/useDarkMode";
-import Grainient from "./Grainient";
+import PixelBlast from "./PixelBlast";
 
 export const BackgroundDecorations = () => {
   const isDark = useDarkMode();
@@ -51,13 +51,19 @@ export const BackgroundDecorations = () => {
     <div className="fixed box-border caret-transparent pointer-events-none z-0 overflow-hidden inset-0 transition-opacity duration-300">
       {isDark && (
         <div className="absolute inset-0 opacity-40">
-          <Grainient
-            color1="#000000"
-            color2="#ff4444"
-            color3="#f44444"
-            timeSpeed={0.05}
-            warpStrength={0.1}
-            grainAmount={0.2}
+          <PixelBlast
+            variant="square"
+            pixelSize={3}
+            color="#B19EEF"
+            patternScale={2}
+            patternDensity={1.1}
+            enableRipples
+            rippleSpeed={0.55}
+            rippleThickness={0.1}
+            rippleIntensityScale={1}
+            speed={0.5}
+            transparent={false}
+            edgeFade={0.3}
             className="w-full h-full"
           />
         </div>
