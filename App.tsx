@@ -15,7 +15,8 @@ export const App = () => {
     <div className="
 relative
 min-h-screen
-bg-transparent text-[#111111] dark:text-white
+bg-white dark:bg-black
+text-[#111111] dark:text-white
 font-inter
 text-base
 leading-6
