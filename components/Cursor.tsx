@@ -2,7 +2,7 @@ import ParticleField from './ui/ParticleField';
 function Cursor() {
   return (
     <div
-      className="fixed inset-0 -z-20 pointer-events-none"
+      className="fixed inset-0 z-[-10] pointer-events-none"
     >
       <ParticleField
         count={480}

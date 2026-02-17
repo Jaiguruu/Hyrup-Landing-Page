@@ -15,8 +15,7 @@ export const App = () => {
     <div className="
 relative
 min-h-screen
-bg-[#f5f1e8] dark:bg-black
-text-[#111111] dark:text-white
+bg-transparent text-[#111111] dark:text-white
 font-inter
 text-base
 leading-6
@@ -25,7 +24,7 @@ overflow-x-hidden
 ">
       <div className="box-border caret-transparent hidden"></div>
       <div className="absolute box-border caret-transparent block"></div>
-    
+
       <main className="relative box-border caret-transparent min-h-[1000px] overflow-x-hidden overflow-y-auto">
 
         <BackgroundDecorations />
@@ -37,7 +36,7 @@ overflow-x-hidden
         <CommunitySection />
         <FinalCTASection />
         <Footer />
-        
+
       </main>
 
     </div>

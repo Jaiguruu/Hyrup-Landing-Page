@@ -428,6 +428,39 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
           break;
         }
     }
+    const mapToPixels = (e: PointerEvent) => {
+      const t = threeRef.current;
+      if (!t) return { fx: 0, fy: 0, w: 0, h: 0 };
+      const rect = t.renderer.domElement.getBoundingClientRect();
+      const scaleX = t.renderer.domElement.width / rect.width;
+      const scaleY = t.renderer.domElement.height / rect.height;
+      const fx = (e.clientX - rect.left) * scaleX;
+      const fy = (rect.height - (e.clientY - rect.top)) * scaleY;
+      return {
+        fx,
+        fy,
+        w: t.renderer.domElement.width,
+        h: t.renderer.domElement.height
+      };
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      const t = threeRef.current;
+      if (!t) return;
+      const { fx, fy } = mapToPixels(e);
+      const ix = t.clickIx;
+      t.uniforms.uClickPos.value[ix].set(fx, fy);
+      t.uniforms.uClickTimes.value[ix] = t.uniforms.uTime.value;
+      t.clickIx = (ix + 1) % MAX_CLICKS;
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      const t = threeRef.current;
+      if (!t || !t.touch) return;
+      const { fx, fy, w, h } = mapToPixels(e);
+      t.touch.addTouch({ x: fx / w, y: fy / h });
+    };
+
     if (mustReinit) {
       if (threeRef.current) {
         const t = threeRef.current;
@@ -552,35 +585,10 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         composer.addPass(noisePass);
       }
       if (composer) composer.setSize(renderer.domElement.width, renderer.domElement.height);
-      const mapToPixels = (e: PointerEvent) => {
-        const rect = renderer.domElement.getBoundingClientRect();
-        const scaleX = renderer.domElement.width / rect.width;
-        const scaleY = renderer.domElement.height / rect.height;
-        const fx = (e.clientX - rect.left) * scaleX;
-        const fy = (rect.height - (e.clientY - rect.top)) * scaleY;
-        return {
-          fx,
-          fy,
-          w: renderer.domElement.width,
-          h: renderer.domElement.height
-        };
-      };
-      const onPointerDown = (e: PointerEvent) => {
-        const { fx, fy } = mapToPixels(e);
-        const ix = threeRef.current?.clickIx ?? 0;
-        uniforms.uClickPos.value[ix].set(fx, fy);
-        uniforms.uClickTimes.value[ix] = uniforms.uTime.value;
-        if (threeRef.current) threeRef.current.clickIx = (ix + 1) % MAX_CLICKS;
-      };
-      const onPointerMove = (e: PointerEvent) => {
-        if (!touch) return;
-        const { fx, fy, w, h } = mapToPixels(e);
-        touch.addTouch({ x: fx / w, y: fy / h });
-      };
-      renderer.domElement.addEventListener('pointerdown', onPointerDown, {
+      window.addEventListener('pointerdown', onPointerDown, {
         passive: true
       });
-      renderer.domElement.addEventListener('pointermove', onPointerMove, {
+      window.addEventListener('pointermove', onPointerMove, {
         passive: true
       });
       let raf = 0;
@@ -662,7 +670,8 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       t.material.dispose();
       t.composer?.dispose();
       t.renderer.dispose();
-      if (t.renderer.domElement.parentElement === container) container.removeChild(t.renderer.domElement);
+      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointermove', onPointerMove);
       threeRef.current = null;
     };
   }, [

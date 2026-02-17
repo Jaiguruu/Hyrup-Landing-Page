@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useDarkMode } from "../hooks/useDarkMode";
-import PixelBlast from "./PixelBlast";
+import PixelBlast from "./ui/PixelBlast";
 
 export const BackgroundDecorations = () => {
   const isDark = useDarkMode();
@@ -48,24 +48,25 @@ export const BackgroundDecorations = () => {
   ];
 
   return (
-    <div className="fixed box-border caret-transparent pointer-events-none z-0 overflow-hidden inset-0 transition-opacity duration-300">
+    <div className="fixed box-border caret-transparent pointer-events-none z-[-20] overflow-hidden inset-0 transition-opacity duration-300 bg-[#f5f1e8] dark:bg-black">
       {isDark && (
-        <div className="absolute inset-0 opacity-40">
-          <PixelBlast
-            variant="square"
-            pixelSize={3}
-            color="#B19EEF"
-            patternScale={2}
-            patternDensity={1.1}
-            enableRipples
-            rippleSpeed={0.55}
-            rippleThickness={0.1}
-            rippleIntensityScale={1}
-            speed={0.5}
-            transparent={false}
-            edgeFade={0.3}
-            className="w-full h-full"
-          />
+        <div className="absolute inset-0 flex items-center justify-center bg-black">
+          <div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+            <PixelBlast
+              variant="square"
+              pixelSize={3}
+              color="#B19EEF"
+              patternScale={2}
+              patternDensity={1.1}
+              enableRipples
+              rippleSpeed={0.55}
+              rippleThickness={0.1}
+              rippleIntensityScale={1}
+              speed={0.5}
+              transparent={false}
+              edgeFade={0.3}
+            />
+          </div>
         </div>
       )}
 
