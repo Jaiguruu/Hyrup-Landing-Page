@@ -2,6 +2,11 @@
 
 HYRUP is a specialized career launchpad built by students, for students. It focuses on showcasing actual skills rather than just degrees, helping students from all backgrounds find early access to job opportunities and mentor-led communities.
 
+
+## Live Link
+
+" "
+
 ## ✨ Key Features
 
 - **Skill-Based Portraits**: Build a portfolio that highlights what you can actually do.
@@ -65,5 +70,8 @@ The output will be available in the `dist` folder.
 This project utilizes a **Glassmorphic** and **Neo-Minimalist** design language. It uses a combination of smooth CSS transitions and high-performance WebGL shaders to create an interactive experience that feels alive.
 
 ---
+
+
+
 
 Made with ❤️ by students, for students.
