@@ -627,9 +627,9 @@ class LightsSticks {
 
     let colorArray: THREE.Color[];
     if (Array.isArray(options.colors.sticks)) {
-      colorArray = options.colors.sticks.map(c => new THREE.Color(c));
+      colorArray = (options.colors.sticks as any[]).map(c => new THREE.Color(c));
     } else {
-      colorArray = [new THREE.Color(options.colors.sticks)];
+      colorArray = [new THREE.Color(options.colors.sticks as any)];
     }
 
     for (let i = 0; i < totalSticks; i++) {
